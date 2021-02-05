@@ -31,7 +31,9 @@ var defaultOptions = options{
 	maxGoroutines:  384,
 	minSplitSize:   -1,
 	fastOneParity:  false,
-	inversionCache: true,
+
+	// set default to disable invertible matrix cache
+	inversionCache: false,
 
 	// Detect CPU capabilities.
 	useSSSE3:  cpuid.CPU.Supports(cpuid.SSSE3),
@@ -117,6 +119,9 @@ func WithConcurrentStreamWrites(enabled bool) Option {
 func WithInversionCache(enabled bool) Option {
 	return func(o *options) {
 		o.inversionCache = enabled
+
+		// set to disable invertible matrix cache
+		o.inversionCache = false
 	}
 }
 
